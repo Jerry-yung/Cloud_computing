@@ -2,7 +2,7 @@ name: First CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branc hes: [ "main", "master" ]
   workflow_dispatch:
 
 jobs:
