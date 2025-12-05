@@ -36,3 +36,16 @@ jobs:
     steps:
       - name: Deploy script
         run: echo "This job deploys something from the ${{ github.ref_name }} branch."
+      - name: Send notification to Feishu
+        if: always()   # 不管成功还是失败，都执行
+        run: |
+          curl -X POST ${{ secrets.FEISHU_WEBHOOK }} \
+          -H "Content-Type: application/json" \
+          -d '{
+                "msg_type": "text",
+                "content": {
+                  "text": "GitHub Actions: 构建已结束，状态：${{ job.status }}"
+                }
+              }'
+
+  
